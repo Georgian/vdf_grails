@@ -7,6 +7,10 @@ class Role {
 	static mapping = {
 		cache true
 	}
+	
+	Role (def authority) {
+		this.authority = authority
+	}
 
 	static constraints = {
 		authority blank: false, unique: true

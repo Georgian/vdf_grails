@@ -7,15 +7,20 @@ class VDFAthlete {
 	transient springSecurityService
 	
 	String name
-	String email
+	String username // email
 	String password
 
 	boolean enabled = true
+	
+	VDFAthlete (def username, def password) {
+		this.username = username
+		this.password = password
+	}
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		email blank: false, unique: true
+		username blank: false, unique: true
 		password blank: false
 	}
 

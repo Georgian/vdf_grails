@@ -28,6 +28,9 @@ endpoints:
 
 ---
 grails:
+    dbconsole: 
+       enabled: true
+       urlRoot: '/dbConsole'
     plugin:
        springsecurity:
           userLookup:
@@ -35,12 +38,12 @@ grails:
              authorityJoinClassName: 'vdf_grails.auth.VDFAthleteRole'
           authority:
              className: 'vdf_grails.auth.Role'
-          filterChain:
-             chainMap: 
+          #filterChain:
+           #  chainMap: 
                 # Stateless chain for REST API
-                - {pattern: '/api/**', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'}
+            #    - {pattern: '/api/**', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'}
                 #Traditional chain
-                - {pattern: '/**', filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'}
+             #   - {pattern: '/**', filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'}
 
           rest:
              token:   

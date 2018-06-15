@@ -8,6 +8,8 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+		
+		"/events"(controller: 'VDFEvent', action: 'allEvents')
 
         "/"(view:"/index")
         "500"(view:'/error')
