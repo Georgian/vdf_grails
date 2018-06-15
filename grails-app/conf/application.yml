@@ -28,6 +28,23 @@ endpoints:
 
 ---
 grails:
+    plugin:
+       springsecurity:
+          filterChain:
+             chainMap: 
+                # Stateless chain for REST API
+                - {pattern: '/api/**', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'}
+                #Traditional chain
+                - {pattern: '/**', filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'}
+
+          rest:
+             token:   
+                storage:
+                   useGorm: true
+                   gorm:
+                      tokenDomainClassname: 'vdf_grails.AuthenticationToken'
+                   jwt:
+                      secret: 'qrD6h8K6S9503Q06Y6Rfk21TErImPYqa'
     mime:
         disable:
             accept:
