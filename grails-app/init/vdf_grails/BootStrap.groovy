@@ -1,16 +1,18 @@
 package vdf_grails
 
 import vdf_grails.auth.Role
-import vdf_grails.auth.VDFAthleteRole
+import vdf_grails.auth.UserRole
 
 class BootStrap {
+	
+	def springSecurityService
 
     def init = { servletContext ->
 		
-		def athlete_1 = new VDFAthlete(username: 'em', password: '123').save(true)
+		def athlete_1 = new VDFAthlete(email: "covfefe", password: springSecurityService.encodePassword("lol")).save(flush: true, failOnError: true)
 		def userRole = new Role('ROLE_USER').save(true)
 		
-		//VDFAthleteRole.create athlete_1, userRole
+		UserRole.create athlete_1, userRole
     }
     def destroy = {
     }

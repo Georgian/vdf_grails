@@ -10,8 +10,8 @@ grails:
             events: false
 info:
     app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
+        name: 'vdf'
+        version: '1.0.0'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
     main:
@@ -28,28 +28,31 @@ endpoints:
 
 ---
 grails:
-    dbconsole: 
-       enabled: true
-       urlRoot: '/dbConsole'
     plugin:
        springsecurity:
           userLookup:
+             usernamePropertyName: 'email'
+             passwordPropertyName: 'password'
+             useJsonCredentials: true
              userDomainClassName: 'vdf_grails.VDFAthlete'
              authorityJoinClassName: 'vdf_grails.auth.VDFAthleteRole'
           authority:
              className: 'vdf_grails.auth.Role'
-          #filterChain:
-           #  chainMap: 
+          filterChain:
+             chainMap: 
                 # Stateless chain for REST API
-            #    - {pattern: '/api/**', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'}
+                - {pattern: '/api/**', filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'}
                 #Traditional chain
-             #   - {pattern: '/**', filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'}
-
+                - {pattern: '/**', filters: 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'}
+          controllerAnnotations:
+             staticRules:
+                - pattern: '/**'
+                  access: ['permitAll'] 
+         
           rest:
              token:   
                 storage:
                    useGorm: true
-                   useJsonCredentials: true
                    gorm:
                       tokenDomainClassname: 'vdf_grails.auth.AuthenticationToken'
     mime:

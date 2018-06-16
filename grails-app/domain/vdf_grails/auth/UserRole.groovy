@@ -1,9 +1,10 @@
 package vdf_grails.auth
 
 import org.apache.commons.lang.builder.HashCodeBuilder
+
 import vdf_grails.VDFAthlete
 
-class VDFAthleteRole implements Serializable {
+class UserRole implements Serializable {
 
 	private static final long serialVersionUID = 1
 
@@ -11,7 +12,7 @@ class VDFAthleteRole implements Serializable {
 	Role role
 
 	boolean equals(other) {
-		if (!(other instanceof VDFAthleteRole)) {
+		if (!(other instanceof UserRole)) {
 			return false
 		}
 
@@ -26,20 +27,20 @@ class VDFAthleteRole implements Serializable {
 		builder.toHashCode()
 	}
 
-	static VDFAthleteRole get(long userId, long roleId) {
-		VDFAthleteRole.where {
+	static UserRole get(long userId, long roleId) {
+		UserRole.where {
 			user == User.load(userId) &&
 					role == Role.load(roleId)
 		}.get()
 	}
 
-	static VDFAthleteRole create(VDFAthlete user, Role role, boolean flush = false) {
-		new VDFAthleteRole(user: user, role: role).save(flush: flush, insert: true)
+	static UserRole create(VDFAthlete user, Role role, boolean flush = false) {
+		new UserRole(user: user, role: role).save(flush: flush, insert: true)
 	}
 
 	static boolean remove(VDFAthlete u, Role r, boolean flush = false) {
 
-		int rowCount = VDFAthleteRole.where {
+		int rowCount = UserRole.where {
 			user == User.load(u.id) &&
 					role == Role.load(r.id)
 		}.deleteAll()
@@ -48,13 +49,13 @@ class VDFAthleteRole implements Serializable {
 	}
 
 	static void removeAll(VDFAthlete u) {
-		VDFAthleteRole.where {
+		UserRole.where {
 			user == User.load(u.id)
 		}.deleteAll()
 	}
 
 	static void removeAll(Role r) {
-		VDFAthleteRole.where {
+		UserRole.where {
 			role == Role.load(r.id)
 		}.deleteAll()
 	}
