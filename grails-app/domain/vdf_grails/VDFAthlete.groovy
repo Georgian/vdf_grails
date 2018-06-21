@@ -15,7 +15,6 @@ class VDFAthlete {
 	boolean passwordExpired
 	
 	VDFAthlete (def email, def password) {
-		this()
 		this.email = email
 		this.password = password
 	}

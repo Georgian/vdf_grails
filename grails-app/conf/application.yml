@@ -48,11 +48,10 @@ grails:
              staticRules:
                 - pattern: '/**'
                   access: ['permitAll'] 
-         
           rest:
              token:   
                 storage:
-                   useGorm: true
+                   usernamePropertyName: 'email'
                    gorm:
                       tokenDomainClassname: 'vdf_grails.auth.AuthenticationToken'
     mime:

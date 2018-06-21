@@ -4,11 +4,13 @@ class VDFEvent {
 
 	String name,
 			description,
-			date, timeframe,
+			date,
+            timeframe,
 			locationName, locationCoordinates,
 			photoLink,
 			website
 	
     static constraints = {
     }
+
 }
